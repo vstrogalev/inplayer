@@ -20,7 +20,7 @@ const playlists = [
         id: "2",
         artistName: "50 cent",
         trackTitle: "In da Club",
-        trackCoverImage: "./img/cardImage/trackList/track1.jpeg",
+        trackCoverImage: "./img/cardImage/trackList/track2.jpeg",
         trackAudioSrc: "./audio/50cent - In da club.mp3",
         isHot: false,
         duration: 271,
@@ -72,7 +72,7 @@ function createNode(tag, className, content, src, alt) {
   if (content) {
     node.textContent = content;
   }
-  if (tag === "img" && src) {
+  if (src) {
     node.src = src;
   }
   if (tag === "img" && alt) {
@@ -135,6 +135,26 @@ function PlayLists() {
   return playLists;
 }
 
+//===========================================
+// includes buttons edit and delete to use in PlaylistInfo and in Tracklist
+function ButtonContainer() {
+  const buttonContainer = createNode("div", "buttons-container");
+
+  const buttonEdit = createNode("button");
+  buttonEdit.append(
+    createNode("img", "button-icon", "", "img/icons/edit.svg", "edit")
+  );
+
+  const buttonDelete = createNode("button");
+  buttonDelete.append(
+    createNode("img", "button-icon", "", "img/icons/basket.svg", "delete")
+  );
+
+  buttonContainer.append(buttonEdit, buttonDelete);
+
+  return buttonContainer;
+}
+
 //=========================================
 function PlaylistInfo(playlistInfo) {
   const nodeResult = createNode("div", "playlist-info");
@@ -157,19 +177,7 @@ function PlaylistInfo(playlistInfo) {
     createNode("div", "tracks-count", `${numberOfTracks} tracks`)
   );
 
-  const buttonContainer = createNode("div", "buttons-container");
-
-  const buttonEdit = createNode("button");
-  buttonEdit.append(
-    createNode("img", "button-icon", "", "img/icons/edit.svg", "edit")
-  );
-
-  const buttonDelete = createNode("button");
-  buttonDelete.append(
-    createNode("img", "button-icon", "", "img/icons/basket.svg", "delete")
-  );
-
-  buttonContainer.append(buttonEdit, buttonDelete);
+  const buttonContainer = ButtonContainer();
 
   nodeResult.append(titleContainer, buttonContainer);
   return nodeResult;
@@ -204,6 +212,31 @@ function Tracklist(tracks) {
 
     const tracksNodes = tracks.map(track => {
       const trackElement = createNode('li', 'track-element')
+
+      trackElement.append(createNode('img', 'track-cover-image', '', track.trackCoverImage, 'track-cover'));
+
+      const trackDetails = createNode('div', 'track-details');
+
+      const trackTopLine = createNode('div', 'track-top-line');
+      track.isHot && trackTopLine.append(createNode('img', 'track-status', '', 'img/icons/hot.svg', 'hot'))
+
+      const trackInfo = createNode('div', 'track-info')
+      trackInfo.append(createNode('div', 'track-name', `${track.artistName} - ${track.trackTitle}`));
+      const buttonContainer = ButtonContainer();
+
+      trackInfo.append(buttonContainer);
+      trackTopLine.append(trackInfo);
+
+      const audio = createNode('audio', '', '', track.trackAudioSrc);
+      audio.controls = true;
+
+      trackDetails.append(
+        trackTopLine,
+        audio
+      );
+
+      trackElement.append(trackDetails);
+
       return trackElement
     })
 
