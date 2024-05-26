@@ -28,8 +28,10 @@ console.log(htmlElementSelectTechnologies)
 
 const playlists = [
 	{
-		playlistCoverImage: "./img/cardImage/image1.jpeg",
-		title: "Hip-Hop Hits",
+		playlistInfo: {
+			playlistCoverImage: "./img/cardImage/image1.jpeg",
+			title: "Hip-Hop Hits"
+		},
 		tracks: [
 			{
 				artistName: "Eminem",
@@ -50,8 +52,10 @@ const playlists = [
 		],
 	},
 	{
-		playlistCoverImage: "./img/cardImage/image2.jpeg",
-		title: "Rap Hits 1990s",
+    playlistInfo: {
+      playlistCoverImage: "./img/cardImage/image2.jpeg",
+      title: "Rap Hits 1990s"
+    },
 		tracks: [
 			{
 				artistName: "Public Enemy",
