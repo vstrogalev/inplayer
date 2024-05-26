@@ -93,7 +93,9 @@ function App() {
 function Header() {
   const header = createNode("header");
   const headerContainer = createNode("div", "header-container");
-  headerContainer.append(createNode("img", "", "", "img/logo/logo.svg", "logo"));
+  headerContainer.append(
+    createNode("img", "", "", "img/logo/logo.svg", "logo")
+  );
 
   headerContainer.append(createNode("div", "logo-name", "InPlayer"));
 
@@ -175,9 +177,46 @@ function PlaylistInfo(playlistInfo) {
 
 //=========================================
 function Tracklist(tracks) {
-  function AddTrackPanel() {}
+  function AddTrackPanel() {
+    // Создаем основной контейнер для панели добавления треков
+    const panel = createNode("div", "add-track-panel");
+
+    // Создаем заголовок панели
+    panel.append(createNode("h3", "tracklist-title", "Tracks"));
+
+    // Создаем кнопку добавления трека
+    const button = createNode("button", "button-add-track");
+
+    // Создаем изображение для кнопки и добавляем его в кнопку
+    button.append(createNode("img", "", "", "img/icons/add.svg", "add"));
+
+    // Добавляем текст в кнопку после изображения
+    button.append(document.createTextNode("Add Track"));
+
+    // Добавляем кнопку в панель
+    panel.append(button);
+
+    return panel;
+  }
+
+  function List(tracks) {
+    const listContainer = createNode('ul', 'list');
+
+    const tracksNodes = tracks.map(track => {
+      const trackElement = createNode('li', 'track-element')
+      return trackElement
+    })
+
+    listContainer.append(...tracksNodes);
+    return listContainer;
+  }
 
   const tracklist = createNode("div", "tracklist");
+
+  tracklist.append(
+    AddTrackPanel(),
+    List(tracks)
+  );
 
   return tracklist;
 }
