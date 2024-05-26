@@ -26,29 +26,30 @@ document.body.appendChild(htmlElementSelectTechnologies);
 console.log(htmlElementSelectTechnologies)
 */
 
-const playlist1 = {
-	// вот здесь должны быть ваши св-ва
-	albumImg: "http://...",
-	title: "Hip-Hop Hits",
-	tracks: [
-		{
-			artist: "Eminem",
-			song: "Rap God",
-			imgSrc: "http://...",
-			audioSrc: "http://...",
-			liked: true,
-			duration: 221,
-		},
-		{
-			artist: "50 cent",
-			song: "In da Club",
-			imgSrc: "http://...",
-			audioSrc: "http://...",
-			liked: false,
-			duration: 271,
-		},
-	],
-};
+const playlists = [
+	{
+		playlistCoverImage: "./img/cardImage/image1.jpeg",
+		title: "Hip-Hop Hits",
+		tracks: [
+			{
+				artistName: "Eminem",
+				trackTitle: "Rap God",
+				trackCoverImage: "./img/cardImage/trackList/track1.jpeg",
+				trackAudioSrc: "./audio/Eminem - Rap God.mp3",
+				isHot: true,
+				duration: 221,
+			},
+			{
+				artistName: "50 cent",
+				trackTitle: "In da Club",
+				trackCoverImage: "./img/cardImage/trackList/track1.jpeg",
+				trackAudioSrc: "./audio/50cent - In da club.mp3",
+				isHot: false,
+				duration: 271,
+			},
+		],
+	},
+];
 
 const playlistNode = document.createElement("section");
 
@@ -66,13 +67,13 @@ sectionHeaderP.textContent = "Playlist";
 sectionHeader.appendChild(sectionHeaderP);
 // title
 const sectionTitle = document.createElement("h2");
-sectionTitle.textContent = playlist1.title;
+sectionTitle.textContent = playlists.title;
 sectionHeader.appendChild(sectionTitle);
 
 // number of tracks, duration
 const sectionInfo = document.createElement("p");
-const numberOfTracks = playlist1.tracks.length;
-const duration = playlist1.tracks.reduce((acc, el) => {
+const numberOfTracks = playlists.tracks.length;
+const duration = playlists.tracks.reduce((acc, el) => {
 	return acc + el.duration;
 }, 0);
 const durationMins = Math.floor(duration / 60);
@@ -86,18 +87,21 @@ const sectionArtist = document.createElement("p");
 //  and others = 11 chars
 // string length not more than 35 chars minus 10 chars for ' and others'
 let i = 0;
-let artists = playlist1.tracks[i].artist;
+let artists = playlists.tracks[i].artistName;
 
-while (artists.length <= 35 && i < playlist1.tracks.length) {
-  if ((i + 1) <= playlist1.tracks.length - 1 ) {
-    if (artists.length + playlist1.tracks[i+1].artist.length + 2 < 25) {
-      artists += ', ' + playlist1.tracks[i+1].artist;
-    }
-  }
-  i++;
+while (artists.length <= 35 && i < playlists.tracks.length) {
+	if (i + 1 <= playlists.tracks.length - 1) {
+		if (
+			artists.length + playlists.tracks[i + 1].artistName.length + 2 <
+			25
+		) {
+			artists += ", " + playlists.tracks[i + 1].artistName;
+		}
+	}
+	i++;
 }
 
-artists += ' and others';
+artists += " and others";
 sectionArtist.textContent = artists;
 
 // connect artists to section header
@@ -109,7 +113,7 @@ playlistNode.appendChild(sectionHeader);
 // songs
 const songs = document.createElement("ul");
 
-Array.from(playlist1).forEach((element) => {
+Array.from(playlists).forEach((element) => {
 	// song
 	const song = document.createElement("li");
 	// song__img
