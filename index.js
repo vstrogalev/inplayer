@@ -49,6 +49,28 @@ const playlists = [
 			},
 		],
 	},
+	{
+		playlistCoverImage: "./img/cardImage/image2.jpeg",
+		title: "Rap Hits 1990s",
+		tracks: [
+			{
+				artistName: "Public Enemy",
+				trackTitle: "Fight the Power",
+				trackCoverImage: "./img/cardImage/trackList/track5.jpeg",
+				trackAudioSrc: "./audio/Public Enemy - Fight The Power.mp3",
+				isHot: true,
+				duration: 282,
+			},
+			{
+				artistName: "Vanila Ice",
+				trackTitle: "Ice Ice Baby",
+				trackCoverImage: "./img/cardImage/trackList/track6.jpeg",
+				trackAudioSrc: "./audio/Vanila Ice - Ice Baby.mp3",
+				isHot: false,
+				duration: 268,
+			},
+		],
+	},
 ];
 
 const playlistNode = document.createElement("section");
