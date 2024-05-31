@@ -1,4 +1,4 @@
-import { playlists } from "./playlists.js";
+import { playlists } from "./data.js";
 
 /**
  * @param {string} tag it's tag, that will be created
